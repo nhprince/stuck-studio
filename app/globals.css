@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --color-brand:     #dc2626;
+  --color-brand-dim: rgba(220, 38, 38, 0.15);
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+}
+
+/* ─── Base Reset & Typography ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
+}
+
+/* ─── Focus Styles (global accessible outline) ──────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ─── Image Optimization Defaults ──────────────────────────────────────── */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── Selection Highlight ───────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(220, 38, 38, 0.3);
+  color: #fecaca;
+}
+
+/* ─── Smooth anchor offset for fixed navbar ─────────────────────────────── */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ─── Remove animation for users who prefer reduced motion ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
