@@ -3,7 +3,6 @@
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import {
-  Terminal,
   ChevronRight,
   Code2,
   Terminal as TerminalIcon,

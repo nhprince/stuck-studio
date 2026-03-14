@@ -5,3 +5,10 @@ coverage/
 *.log
 .env*
 !.env.example
+out/
+
+# Big media assets
+public/videos/
+project videos/
+Thumbnails designs/
+file_example_MP4*.mp4

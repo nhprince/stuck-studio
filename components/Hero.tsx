@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Play } from 'lucide-react';
+import Link from 'next/link';
 
 interface Splatter {
   id: number;
@@ -11,12 +12,13 @@ interface Splatter {
   scale: number;
 }
 
-export default function Hero() {
+export default function Hero({ ready = true }: { ready?: boolean }) {
   const [splatters, setSplatters] = useState<Splatter[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timeout = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timeout);
   }, []);
 
   const spawnSplatter = useCallback((x: number, y: number) => {
@@ -45,7 +47,7 @@ export default function Hero() {
 
   // Auto-splatter on load
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !ready) return;
 
     const timer = setTimeout(() => {
       // Artistic scatter points (scaled for mobile)
@@ -68,7 +70,7 @@ export default function Hero() {
     }, 2200);
 
     return () => clearTimeout(timer);
-  }, [mounted, spawnSplatter]);
+  }, [mounted, ready, spawnSplatter]);
 
   return (
     <section
@@ -93,14 +95,15 @@ export default function Hero() {
 
       {/* Subtle grid overlay */}
       <div
-        className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwaDYwVjB6TTEgMWg1OHY1OEgxVjF6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PC9nPjwvc3ZnPg==')] opacity-10 pointer-events-none"
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{ backgroundImage: "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwaDYwVjB6TTEgMWg1OHY1OEgxVjF6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PC9nPjwvc3ZnPg==\")" }}
         aria-hidden="true"
       />
 
       {/* Cinematic Ambient Layer (Option 2) */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Film Grain */}
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
 
         {/* Drifting Light Leaks */}
         {mounted && (
@@ -149,7 +152,6 @@ export default function Hero() {
                 transition={{
                   opacity: { duration: 0.3 },
                   scale: { type: 'spring', damping: 20, stiffness: 90 },
-                  exit: { duration: 2.5, ease: 'easeIn' }
                 }}
                 style={{
                   left: s.x,
@@ -171,7 +173,7 @@ export default function Hero() {
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
@@ -194,7 +196,7 @@ export default function Hero() {
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] mb-6"
         >
@@ -208,14 +210,14 @@ export default function Hero() {
             <span className="relative z-10 italic font-light">Creativity.</span>
             <motion.span
               initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
+              animate={ready ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
               transition={{ duration: 1.2, delay: 0.8, ease: 'backOut' }}
               style={{ filter: 'url(#paint-texture)' }}
               className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-700 to-red-800 -skew-x-6 -rotate-1 origin-left pointer-events-none rounded-[15%_25%_5%_35%] shadow-[0_4px_12px_rgba(153,27,27,0.4)]"
             />
             <motion.span
               initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 0.4 }}
+              animate={ready ? { scaleX: 1, opacity: 0.4 } : { scaleX: 0, opacity: 0 }}
               transition={{ duration: 1, delay: 1, ease: 'circOut' }}
               style={{ filter: 'url(#paint-texture)' }}
               className="absolute inset-0 bg-red-900/50 -skew-x-3 rotate-1 origin-left pointer-events-none rounded-[20%_15%_10%_25%] mix-blend-overlay"
@@ -226,7 +228,7 @@ export default function Hero() {
         {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="max-w-2xl text-lg md:text-xl text-zinc-400 mb-10 leading-relaxed font-light tracking-wide italic"
         >
@@ -237,24 +239,68 @@ export default function Hero() {
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-20"
+          className="flex flex-col sm:flex-row items-center gap-6 mb-20"
         >
-          <a
-            href="/#contact"
-            className="group flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-zinc-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
-          >
-            Start a Project
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
+          {/* Primary CTA: Start a Project */}
+          <div className="relative group/btn">
+            <Link
+              href="/#contact"
+              className="relative flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-display font-bold text-[12px] tracking-[0.2em] uppercase hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 shadow-[0_15px_40px_rgba(255,255,255,0.08)] group overflow-hidden"
+            >
+              {/* Premium Shimmer Sweep */}
+              <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden rounded-full">
+                <motion.div
+                  animate={{ 
+                    x: ['-100%', '200%'],
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "linear",
+                    repeatDelay: 2
+                  }}
+                  className="absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-red-600/10 to-transparent -skew-x-12"
+                />
+              </div>
+
+              {/* Internal Light Flare */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+              <span className="relative z-10">Start a Project</span>
+              
+              <div className="relative z-10 w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white group-hover:rotate-[-45deg] group-hover:scale-110 transition-all duration-500 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                <ArrowRight size={16} />
+              </div>
+            </Link>
+
+            {/* Premium Outer Pulsing Rings */}
+            <div className="absolute inset-0 -z-10 pointer-events-none">
+              <div className="absolute inset-0 rounded-full border border-red-600/0 group-hover/btn:border-red-600/20 group-hover/btn:scale-[1.15] transition-all duration-700" />
+              <div className="absolute inset-0 rounded-full border border-red-600/0 group-hover/btn:border-red-600/10 group-hover/btn:scale-[1.3] transition-all duration-1000" />
+            </div>
+          </div>
+
+          {/* Secondary CTA: See Our Work */}
+          <Link
             href="/#portfolio"
-            className="flex items-center gap-2 px-8 py-4 text-white rounded-full font-medium border border-white/10 hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+            className="group relative flex items-center gap-3 px-8 py-4 text-white rounded-full font-display font-bold text-[12px] tracking-[0.2em] uppercase border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/[0.03] backdrop-blur-sm"
           >
-            <Play size={16} className="fill-white" />
-            See Our Work
-          </a>
+            {/* Play icon animation */}
+            <div className="relative">
+              <Play size={16} className="fill-white group-hover:scale-110 transition-transform duration-500 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+              <motion.div 
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute inset-0 bg-white rounded-full -z-10 blur-sm"
+              />
+            </div>
+            <span>See Our Work</span>
+
+            {/* Bottom Border Orbit */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-gradient-to-r from-transparent via-red-600 to-transparent group-hover:w-1/2 transition-all duration-700" />
+          </Link>
         </motion.div>
 
       </div>

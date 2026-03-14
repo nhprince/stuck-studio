@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import Image from 'next/image';
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
@@ -27,10 +28,12 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           className="flex items-center gap-4"
         >
           <div className="w-16 h-16 relative">
-            <img
+            <Image
               src="/logo-transparent.png"
               alt="Stuck Studio logo"
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              priority
             />
           </div>
           <div className="flex flex-col font-display font-bold text-6xl leading-none tracking-tighter text-white">

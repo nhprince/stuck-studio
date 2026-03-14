@@ -56,6 +56,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $name    = trim(strip_tags($data['name']    ?? ''));
 $email   = trim(strip_tags($data['email']   ?? ''));
 $service = trim(strip_tags($data['service'] ?? ''));
+$timeline = trim(strip_tags($data['timeline'] ?? ''));
 $message = trim(strip_tags($data['message'] ?? ''));
 
 $errors = [];
@@ -102,6 +103,9 @@ $body .= "Name:    {$name}\n";
 $body .= "Email:   {$email}\n";
 if ($service) {
     $body .= "Service: {$service}\n";
+}
+if ($timeline) {
+    $body .= "Timeline: {$timeline}\n";
 }
 $body .= "\nMessage:\n{$message}\n\n";
 $body .= "---\nSent from stuckstudio.com contact form";
