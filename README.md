@@ -1,100 +1,108 @@
 <div align="center">
-  <h1>Stuck Studio</h1>
-  <p><b>Digital Growth Agency & Cinematic Visuals</b></p>
+
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=dc2626&height=200&section=header&text=Stuck%20Studio&fontSize=70&fontColor=ffffff&animation=fadeIn" alt="Stuck Studio Banner" width="100%" />
+
+  <h3><b>Cinematic Visuals & Digital Growth Agency</b></h3>
 
   <p>
     We craft stunning websites and cinematic video content that elevate brands and turn online attention into real business results.
   </p>
 
-  <a href="https://stuckstudio.com"><strong>🌍 Explore the Live Site (stuckstudio.com) »</strong></a>
+  <p>
+    <a href="https://stuckstudio.com" target="_blank">
+      <img src="https://img.shields.io/badge/🌍_Visit_Live_Demo-stuckstudio.com-dc2626?style=for-the-badge&logo=vercel" alt="Live Demo" />
+    </a>
+  </p>
 
-  <br><br>
-
-  <!-- Badges -->
-  <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js" /></a>
-  <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19-087ea4?style=for-the-badge&logo=react" alt="React" /></a>
-  <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" /></a>
-  <a href="https://www.framer.com/motion/"><img src="https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer" alt="Framer Motion" /></a>
+  <p>
+    <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" /></a>
+    <a href="https://react.dev"><img src="https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" /></a>
+    <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <a href="https://www.framer.com/motion/"><img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white" alt="Framer Motion" /></a>
+    <a href="https://lucide.dev/"><img src="https://img.shields.io/badge/Lucide_Icons-F97316?style=flat-square&logo=lucide&logoColor=white" alt="Lucide Icons" /></a>
+  </p>
 
 </div>
 
-<hr />
+---
 
-## ✨ Overview
+## ✨ The Vision
 
-**Stuck Studio** is a premium digital growth agency platform built precisely to help creators, businesses, and personal brands build a strong online presence through strategic content and modern web solutions. The website reflects our commitment to high-end aesthetics, cinematic video integration, and flawless performance.
+**Stuck Studio** isn't just a website; it's a digital experience. Built as a high-performance, statically optimized web application, this platform serves as the digital headquarters for our growth agency. 
 
-## 🚀 Key Features
+We blend **premium dark-mode aesthetics**, **glassmorphism**, and **fluid micro-animations** to construct an environment that feels expensive, responsive, and cinematic.
 
-- **Premium Aesthetics:** A sleek, glassmorphic dark theme with immersive hover effects, smooth gradients, and micro-animations.
-- **Cinematic Portfolio:** Dedicated video & web project showcases, featuring custom lightbox galleries and seamless page transitions.
-- **High Performance:** Powered by Next.js 15 (App Router) with static export optimization for blazing-fast load times.
-- **Dynamic Animations:** Scroll-triggered animations, parallax effects, and fluid layouts powered by Framer Motion.
-- **Fully Responsive:** Carefully crafted to look perfect on devices of all sizes, from ultra-wide desktops to mobile phones.
+---
 
-## 🛠️ Technology Stack
+## 🚀 Key Highlights
 
-| Category | Technology |
-| :--- | :--- |
-| **Framework** | [Next.js 15](https://nextjs.org/) (App Router) |
-| **Library** | [React 19](https://react.dev/) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) & PostCSS |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/) |
-| **Icons** | [Lucide React](https://lucide.dev/) |
-| **Utilities** | `clsx`, `tailwind-merge`, `cva` |
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="33%">
+        <h3>🎨 Premium Aesthetics</h3>
+        <p>Curated crimson/zinc color palette, subtle noise gradients, and immersive glowing effects.</p>
+      </td>
+      <td align="center" width="33%">
+        <h3>🚀 Blazing Fast</h3>
+        <p>100% Statically Generated (SSG) via Next.js 15 for zero-latency page loads and maximum SEO scoring.</p>
+      </td>
+      <td align="center" width="33%">
+        <h3>🎬 Cinematic Media</h3>
+        <p>Dedicated dynamic lightboxes for high-definition video assets and photography series.</p>
+      </td>
+    </tr>
+  </table>
+</div>
 
-## 💻 Getting Started
+---
 
-To run the Stuck Studio platform locally, follow these steps:
+## 🛠️ Architecture
 
-### Prerequisites
+* **Core:** Next.js 15 (App Router), React 19
+* **Styling Engine:** Tailwind CSS v4 + PostCSS
+* **Animation Physics:** Framer Motion
+* **Typography & Iconography:** `Geist Sans`, `Geist Mono`, and `Lucide-React`
+* **Performance:** Fully cached Next.js `out/` export pipeline.
 
-- **Node.js**: v18 or higher
-- **Package Manager**: npm, yarn, or pnpm
+---
 
-### Installation
+## 💻 Running Locally
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/nhprince/stuck-studio.git
-   cd stuck-studio
-   ```
+Experience the code on your local environment:
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+# 1. Clone the repository
+git clone https://github.com/nhprince/stuck-studio.git
 
-3. **Set up environment variables:**
-   ```bash
-   cp .env.example .env.local
-   ```
-   *(Edit `.env.local` to include any necessary API keys or configuration)*
+# 2. Enter the directory
+cd stuck-studio
 
-4. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+# 3. Install packages
+npm install
 
-5. **View the live application:**
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+# 4. Fire up the development server
+npm run dev
+```
 
-## 📁 Project Structure
+> **Note:** Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📁 Directory Architecture
 
 ```text
-stuck-studio/
-├── app/               # Next.js 15 App Router (Pages, Layouts, CSS, Metadata)
-├── components/        # Reusable UI components (Hero, Portfolio, Services, etc.)
-├── hooks/             # Custom React hooks (e.g., use-mobile)
-├── lib/               # Utility functions (e.g., precise class merging)
-├── data/              # Static content & portfolio data structures
-├── public/            # Static assets (images, videos, fonts)
-└── backend/           # Backend services and API integrations
+├── app/               # 🚦 Next.js 15 App Router & API Routes
+├── components/        # 🧩 Modular React Interfaces (Hero, Portfolio)
+├── lib/               # ⚙️ Utility algorithms (clsx, tailwind-merge)
+├── data/              # 🗄️ JSON-based headless CMS data models
+├── public/            # 🖼️ Static assets, videos, and fonts
+└── backend/           # 🔌 PHP Mailer endpoints & legacy handlers
 ```
 
 ---
 
 <div align="center">
-  <p>Built with precision by <b>Stuck Studio</b>.</p>
-  <a href="https://stuckstudio.com">stuckstudio.com</a>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=dc2626&height=100&section=footer" width="100%" alt="footer" />
+  <p>Engineered with pixel-perfect precision by <b>Stuck Studio</b></p>
 </div>
