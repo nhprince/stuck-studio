@@ -21,12 +21,10 @@ const footerLinks = {
   services: [
     { label: 'Web Development', href: '/#services' },
     { label: 'Video Editing', href: '/#services' },
-    { label: 'YouTube Growth', href: '/#services' },
     { label: 'Thumbnail Design', href: '/#services' },
-    { label: 'Social Media', href: '/#services' },
+    { label: 'Growth & Strategy', href: '/#services' },
   ],
   company: [
-    { label: 'About Us', href: '/#about' },
     { label: 'Our Team', href: '/#team' },
     { label: 'Portfolio', href: '/#portfolio' },
     { label: 'Contact', href: '/#contact' },
@@ -63,7 +61,7 @@ const socials = [
   { 
     icon: <Facebook size={20} />, 
     label: 'Facebook', 
-    href: 'https://facebook.com/stuckstudio',
+    href: 'https://www.facebook.com/profile.php?id=61572529270547',
     glowColor: 'group-hover:text-blue-600 group-hover:drop-shadow-[0_0_8px_rgba(37,99,235,0.6)]'
   },
 ];
@@ -119,7 +117,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-zinc-400 text-base leading-relaxed max-w-sm">
-              From Cut to Creativity. We help visionary brands grow online through cinematic content, high-converting code, and strategic YouTube management.
+              From Cut to Creativity. We help visionary brands grow online through video content, high-converting code, and strategic YouTube management.
             </p>
 
             <div className="flex items-center gap-4">

@@ -19,55 +19,59 @@ type ThumbnailItem = typeof thumbnails[number];
 function VideoCard({ item, index }: { item: PortfolioItem; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const mobile = typeof window !== 'undefined' && (
+      'ontouchstart' in window || navigator.maxTouchPoints > 0 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+    );
+    setIsMobile(Boolean(mobile));
+  }, []);
+
+  // Auto-play on mobile (muted) when the component mounts
+  useEffect(() => {
+    if (isMobile && videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().then(() => setPlaying(true)).catch(() => {});
+    }
+  }, [isMobile]);
 
   const handleMouseEnter = () => {
     setHovered(true);
-    if (videoRef.current) videoRef.current.play().then(() => setPlaying(true)).catch(() => { });
+    if (!isMobile && videoRef.current) videoRef.current.play().then(() => setPlaying(true)).catch(() => {});
   };
   const handleMouseLeave = () => {
-    setHovered(false); setPlaying(false);
-    if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; }
+    setHovered(false);
+    if (!isMobile && videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; setPlaying(false); }
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.6 }}>
       <Link href={`/projects/${item.id}`}>
         <div className="relative rounded-[20px] overflow-hidden cursor-pointer select-none" style={{ aspectRatio: '16/10' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          {item.thumbnail && (
-            <img src={item.thumbnail} alt={item.title} className="absolute inset-0 w-full h-full object-cover" style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.7s ease' }} />
-          )}
+          {/* Always render the video element (no static thumbnails) */}
           {item.videoSrc && (
-            <video ref={videoRef} src={item.videoSrc} muted loop playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" style={{ opacity: playing ? 1 : 0 }} />
+            <video
+              ref={videoRef}
+              src={item.videoSrc}
+              muted
+              loop
+              playsInline
+              autoPlay={isMobile}
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-          <div className="absolute inset-0 bg-red-950/20 transition-opacity duration-300" style={{ opacity: hovered ? 1 : 0 }} />
-          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-red-600 origin-top transition-transform duration-500" style={{ transform: hovered ? 'scaleY(1)' : 'scaleY(0)' }} />
-          <div className="absolute top-4 left-5 right-4 flex items-center justify-between">
-            <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] bg-black/70 backdrop-blur-md text-zinc-400 border border-white/10">{item.category}</span>
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black transition-all duration-300" style={{ opacity: hovered ? 1 : 0, transform: hovered ? 'scale(1)' : 'scale(0.7)' }}>
-              <Play className="w-4 h-4 fill-black" />
-            </div>
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center transition-all duration-300" style={{ opacity: hovered && !playing ? 1 : 0, transform: hovered && !playing ? 'scale(1)' : 'scale(0.8)' }}>
-            <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shadow-[0_0_48px_rgba(220,38,38,0.6)]">
-              <Play className="w-6 h-6 text-white fill-white ml-1" />
-            </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 p-5">
-            <div className="flex items-center gap-2 mb-2 transition-all duration-300" style={{ opacity: hovered ? 1 : 0, transform: hovered ? 'translateY(0)' : 'translateY(8px)' }}>
-              <span className="text-red-500 text-xs font-bold uppercase tracking-[0.2em]">{item.stat.value}</span>
-              <span className="text-zinc-500 text-[10px] uppercase tracking-[0.15em]">{item.stat.label}</span>
-            </div>
-            <h3 className="text-white text-xl font-bold tracking-tight mb-2">{item.title}</h3>
-            <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: hovered ? '80px' : '0px', opacity: hovered ? 1 : 0 }}>
-              <p className="text-zinc-400 text-[13px] leading-relaxed mb-3">{item.description}</p>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {item.tags.map((tag) => (
-                <span key={tag} className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-[0.15em] bg-white/10 text-zinc-400 border border-white/10 backdrop-blur-md">{tag}</span>
-              ))}
-            </div>
+
+          {/* Clean overlay: subtle gradient to ensure tags are readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
+          {/* Only show tags (no titles/stat/descriptions) */}
+          <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+            {item.tags.map((tag) => (
+              <span key={tag} className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-[0.15em] bg-white/10 text-zinc-400 border border-white/10">{tag}</span>
+            ))}
           </div>
         </div>
       </Link>
@@ -326,13 +330,34 @@ export default function Portfolio() {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-[10px] font-bold text-red-600 uppercase tracking-[0.4em] mb-4">Our Work</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-4xl md:text-6xl font-bold tracking-tighter bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent leading-[0.95] mb-5">
-            Selected<br />Projects
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-4xl md:text-6xl font-bold tracking-tighter bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent leading-[0.95] mb-4">
+            Featured Work
           </motion.h2>
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="text-zinc-500 text-sm leading-relaxed font-light italic max-w-sm mx-auto">
-            A curated showcase of digital solutions that helped our clients scale reach and revenue.
-          </motion.p>
+
+          {/* Pencil-drawn underline matching Services */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="mx-auto mb-12 w-72 md:w-96 h-10"
+            aria-hidden
+          >
+            <svg viewBox="0 0 320 32" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="g2" x1="0" x2="1">
+                  <stop offset="0%" stopColor="#ff4d4d" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#c40000" stopOpacity="0.95" />
+                </linearGradient>
+              </defs>
+              <path d="M4 18 C 64 8, 128 28, 188 18 S 268 10, 312 18" fill="none" stroke="url(#g2)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8 16 C 68 10, 132 24, 192 16 S 272 12, 308 16" fill="none" stroke="#fff" strokeOpacity="0.06" strokeWidth="2.2" strokeLinecap="round" />
+              <g transform="translate(302,6) rotate(18)">
+                <rect x="0" y="4" width="12" height="5" rx="1" fill="#c69c6d" />
+                <polygon points="12,4 17,8 12,9" fill="#3b3b3b" />
+              </g>
+            </svg>
+          </motion.div>
         </div>
 
         {/* Video */}

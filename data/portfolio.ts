@@ -111,7 +111,7 @@ export const portfolio: PortfolioItem[] = [
 ];
 
 export const thumbnails: ThumbnailItem[] = [
-  { id: 'thumb-1', title: 'International Wedding Story', niche: 'Wedding & Vlog', image: '/projects/wedding-vlog.png', ctr: '14.2%', style: 'Cinematic Cinematic' },
+  { id: 'thumb-1', title: 'International Wedding Story', niche: 'Wedding & Vlog', image: '/projects/wedding-vlog.png', ctr: '14.2%', style: 'Stylish' },
   { id: 'thumb-2', title: 'Exploring the Baltic Sea', niche: 'Travel & Lifestyle', image: '/projects/baltic-sea-travel.png', ctr: '11.8%', style: 'Vibrant Outdoors' },
   { id: 'thumb-3', title: 'Day in Georgetown', niche: 'City Vlogs', image: '/projects/georgetown-vlog.jpg', ctr: '13.5%', style: 'Urban Adventure' },
   { id: 'thumb-4', title: 'Kolkata Secret Visit', niche: 'Travel Vlog', image: '/projects/kolkata-visit.jpeg', ctr: '15.7%', style: 'Mystery Hook' },

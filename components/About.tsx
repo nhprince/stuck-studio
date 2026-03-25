@@ -12,13 +12,13 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-32 relative bg-zinc-950 overflow-hidden" aria-label="About">
-      {/* Cinematic Background Glows */}
+    <section id="about" className="py-16 md:py-24 relative bg-zinc-950 overflow-hidden" aria-label="About">
+      {/* Background Glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-600/5 blur-[100px] rounded-full -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-red-600/5 blur-[100px] rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left — Brand Content (Clean Version) */}
           <motion.div
@@ -34,18 +34,18 @@ export default function About() {
               </p>
             </div>
 
-            <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-[0.95]">
+            <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter mb-6 leading-[0.98]">
               Building dominance <br />
               through <span className="text-red-700 italic font-medium">strategic content.</span>
             </h2>
 
-            <div className="space-y-6 text-zinc-400 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-light tracking-wide">
+            <div className="space-y-4 text-zinc-400 text-base md:text-lg leading-relaxed mb-8 max-w-xl font-light tracking-wide">
               <p>
                 Stuck Studio is a digital growth powerhouse. We help creators, startups, and
                 brands claim their space online through <span className="text-white font-medium">high-impact media</span> and <span className="text-white font-medium">elite engineering</span>.
               </p>
-              <p className="text-zinc-500 text-base md:text-lg">
-                By merging cinematic production with high-performance development, we build
+              <p className="text-zinc-500 text-sm md:text-base">
+                By merging video production with high-performance development, we build
                 digital ecosystems that command attention and deliver revenue.
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function About() {
                   {
                     icon: Play,
                     title: 'YouTube & Strategy',
-                    desc: 'Cinematic editing and data-driven growth architecture.',
+                    desc: 'Video editing and data-driven growth architecture.',
                     badge: 'Div_01'
                   },
                   {

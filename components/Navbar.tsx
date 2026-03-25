@@ -7,7 +7,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const navLinks = [
-  { name: 'About', href: '/#about' },
   { name: 'Services', href: '/#services' },
   { name: 'Portfolio', href: '/#portfolio' },
   { name: 'Team', href: '/#team' },
@@ -115,11 +114,11 @@ export default function Navbar() {
               : 'bg-transparent border border-transparent'
           }`}
         >
-          {/* Logo — transparent S icon + text */}
+          {/* Logo — show only circular S icon (clean header) */}
           <Link
             href="/#home"
             aria-label="Stuck Studio — Back to top"
-            className="flex items-center gap-3 z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+            className="flex items-center z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
           >
             <div className="w-10 h-10 relative shrink-0">
               <Image
@@ -130,12 +129,7 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <div className="flex flex-col font-display font-bold leading-none tracking-tighter text-xl">
-              <span>STUCK</span>
-              <span className="flex items-baseline">
-                STUDIO<span className="text-red-600 text-2xl leading-none">.</span>
-              </span>
-            </div>
+            <span className="sr-only">Stuck Studio</span>
           </Link>
 
           {/* Desktop Nav */}

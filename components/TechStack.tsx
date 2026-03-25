@@ -4,12 +4,12 @@ import { motion } from 'motion/react';
 
 const techStack = [
   // Web Dev — use CDN brand colors (no /ffffff suffix)
-  { name: 'React',        slug: 'react',            local: null },
-  { name: 'Next.js',      slug: 'nextdotjs',        local: null },
-  { name: 'Vue.js',       slug: 'vuedotjs',         local: null },
-  { name: 'Angular',      slug: 'angular',          local: null },
+  { name: 'React',        slug: 'react',            local: '/tech/react.svg' },
+  { name: 'Next.js',      slug: 'nextdotjs',        local: '/tech/nextdotjs.svg' },
+  { name: 'Vue.js',       slug: 'vuedotjs',         local: '/tech/vuedotjs.svg' },
+  { name: 'Angular',      slug: 'angular',          local: '/tech/angular.svg' },
   { name: 'Django',       slug: 'django',           local: null },
-  { name: 'Node.js',      slug: 'nodedotjs',        local: null },
+  { name: 'Node.js',      slug: 'nodedotjs',        local: '/tech/nodedotjs.svg' },
   { name: 'Flutter',      slug: 'flutter',          local: null },
   { name: 'Laravel',      slug: 'laravel',          local: null },
   { name: 'TypeScript',   slug: 'typescript',       local: null },
@@ -54,6 +54,7 @@ function TechIcon({ name, slug, local }: { name: string; slug: string; local: st
           className="w-full h-full object-contain"
           onError={handleError}
           referrerPolicy="no-referrer"
+          crossOrigin="anonymous"
           loading="lazy"
         />
       </div>

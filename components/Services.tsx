@@ -24,16 +24,9 @@ const services = [
   {
     title: 'Video Editing',
     description:
-      'Professional video editing with cinematic color grading, motion graphics, and brand storytelling that keeps audiences watching.',
+      'Professional video editing with color grading, motion graphics, and brand storytelling that keeps audiences watching.',
     icon: <Video className="w-6 h-6" />,
-    features: ['Cinematic Editing', 'Motion Graphics', 'Color Grading', 'Brand Films'],
-  },
-  {
-    title: 'YouTube Growth & Management',
-    description:
-      'End-to-end YouTube channel management — strategy, SEO, audience analytics, and consistent publishing to grow subscribers.',
-    icon: <Youtube className="w-6 h-6" />,
-    features: ['YouTube SEO', 'Content Strategy', 'Analytics & Reporting', 'Channel Optimization'],
+    features: ['High-Quality Editing', 'Motion Graphics', 'Color Grading', 'Brand Films'],
   },
   {
     title: 'Thumbnail Design',
@@ -43,25 +36,23 @@ const services = [
     features: ['High-CTR Layouts', 'Brand Consistency', 'A/B Variants', 'Rapid Delivery'],
   },
   {
-    title: 'Social Media Content',
+    title: 'Growth & Strategy',
     description:
-      'Scroll-stopping short-form content — Reels, Shorts, and TikToks — optimized for each platform algorithm.',
-    icon: <Layers className="w-6 h-6" />,
-    features: ['Reels & Shorts', 'Caption Copywriting', 'Trend Research', 'Batch Production'],
-  },
-  {
-    title: 'Digital Brand Strategy',
-    description:
-      'Cohesive brand identity — from logo and color systems to messaging frameworks that make your brand unmissable online.',
+      'YouTube channel growth, short-form social content, and digital brand strategy — a unified approach for audience growth, creative execution, and brand clarity.',
     icon: <Globe className="w-6 h-6" />,
-    features: ['Brand Identity', 'Messaging Framework', 'Competitor Analysis', 'Style Guide'],
+    features: [
+      'YouTube SEO & Channel Growth',
+      'Short-Form Content & Publishing',
+      'Analytics, Reporting & Optimization',
+      'Brand Identity & Messaging',
+    ],
   },
 ];
 
 export default function Services() {
   return (
     <section id="services" className="relative py-24 md:py-32 bg-zinc-950 overflow-hidden">
-      {/* Cinematic Background Elements */}
+      {/* Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 blur-[120px] rounded-full -z-10 animate-pulse" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-red-600/5 blur-[120px] rounded-full -z-10 animate-pulse" style={{ animationDelay: '2s' }} />
       
@@ -88,38 +79,43 @@ export default function Services() {
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center gap-2 mb-4"
-          >
-            <div className="w-8 h-[1px] bg-red-600/50" />
-            <p className="text-[10px] font-display font-bold text-red-600 uppercase tracking-[0.4em]">
-              What We Do
-            </p>
-            <div className="w-8 h-[1px] bg-red-600/50" />
-          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display text-5xl md:text-7xl font-bold tracking-tighter mb-8 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent"
+            className="font-display text-5xl md:text-7xl font-bold tracking-tighter mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent"
           >
             Our Services
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+
+          {/* Pencil-drawn creative underline */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-zinc-400 text-lg md:text-xl leading-relaxed font-light tracking-wide italic"
+            transition={{ delay: 0.05 }}
+            className="mx-auto mb-12 w-72 md:w-96 h-10"
+            aria-hidden
           >
-            End-to-end digital growth solutions for visionary creators and businesses ready to scale their impact.
-          </motion.p>
+            <svg viewBox="0 0 320 32" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0%" stopColor="#ff4d4d" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#c40000" stopOpacity="0.95" />
+                </linearGradient>
+              </defs>
+              <path d="M4 18 C 64 8, 128 28, 188 18 S 268 10, 312 18" fill="none" stroke="url(#g)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8 16 C 68 10, 132 24, 192 16 S 272 12, 308 16" fill="none" stroke="#fff" strokeOpacity="0.06" strokeWidth="2.2" strokeLinecap="round" />
+              {/* small pencil tip at end */}
+              <g transform="translate(302,6) rotate(18)">
+                <rect x="0" y="4" width="12" height="5" rx="1" fill="#c69c6d" />
+                <polygon points="12,4 17,8 12,9" fill="#3b3b3b" />
+              </g>
+            </svg>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}

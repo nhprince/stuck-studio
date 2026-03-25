@@ -5,7 +5,7 @@ import { AnimatePresence } from 'motion/react';
 import LoadingScreen from '@/components/LoadingScreen';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import About from '@/components/About';
+// About merged into Team
 import Services from '@/components/Services';
 import Portfolio from '@/components/Portfolio';
 import TechStack from '@/components/TechStack';
@@ -26,7 +26,6 @@ export default function HomeClient() {
 
       <Navbar />
       <Hero ready={!loading} />
-      <About />
       <Services />
       <Portfolio />
       <TechStack />

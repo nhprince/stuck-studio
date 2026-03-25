@@ -198,16 +198,16 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] mb-6"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.08] mb-4 md:mb-8"
         >
-          From{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
-            Cut
-          </span>{' '}
-          to{' '}
-          <br className="hidden md:block" />
-          <span className="relative inline-block px-5 py-2 ml-1">
-            <span className="relative z-10 italic font-light">Creativity.</span>
+            From{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 lowercase px-2 sm:px-3 py-1 rounded-md">
+              cuts
+            </span>{' '}
+            to{' '}
+            <br className="hidden md:block" />
+            <span className="relative inline-block px-6 py-2 ml-2">
+              <span className="relative z-10 italic font-light lowercase">creativity</span>
             <motion.span
               initial={{ scaleX: 0, opacity: 0 }}
               animate={ready ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
@@ -230,10 +230,9 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-2xl text-lg md:text-xl text-zinc-400 mb-10 leading-relaxed font-light tracking-wide italic"
-        >
-          We craft stunning websites and cinematic video content that elevate brands and turn
-          online attention into real business results.
+          className="max-w-[min(36ch,80vw)] sm:max-w-[min(44ch,80vw)] md:max-w-[min(56ch,70vw)] text-xs sm:text-sm md:text-base text-zinc-400 mb-4 md:mb-6 leading-snug font-light tracking-wide not-italic whitespace-normal"
+            >
+            We build stunning websites and video content that elevate brands and turn online attention into real business results.
         </motion.p>
 
         {/* CTAs */}
@@ -241,7 +240,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center gap-6 mb-20"
+          className="flex flex-col sm:flex-row items-center gap-6 mb-12 md:mb-20"
         >
           {/* Primary CTA: Start a Project */}
           <div className="relative group/btn">

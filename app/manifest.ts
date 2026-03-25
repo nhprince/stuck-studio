@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Stuck Studio',
     short_name: 'Stuck Studio',
-    description: 'Digital growth agency specializing in web development and cinematic video production.',
+    description: 'Digital growth agency specializing in web development and video production.',
     start_url: '/',
     display: 'standalone',
     background_color: '#09090b',

@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'motion/react';
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Projects Completed' },
-  { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 10, suffix: '+', label: 'Happy Clients' },
+  { value: 455, suffix: '+', label: 'Projects Completed' },
+  { value: 3.5, suffix: '+', label: 'Years Experience' },
+  { value: 100, suffix: '+', label: 'Happy Clients' },
   { value: 24, suffix: '/7', label: 'Support Available' },
 ];
 

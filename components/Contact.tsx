@@ -115,15 +115,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Label */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-[10px] font-bold text-red-600 uppercase tracking-[0.4em] mb-5"
-            >
-              Get In Touch
-            </motion.p>
+            {/* Label removed per request */}
 
             {/* Heading */}
             <h2 className="font-display text-4xl md:text-5xl xl:text-6xl font-bold tracking-tighter mb-5 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent leading-[0.9]">
