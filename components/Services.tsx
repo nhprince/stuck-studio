@@ -115,7 +115,7 @@ export default function Services() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -123,7 +123,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group p-8 rounded-[32px] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-white/10 transition-all duration-500 relative flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="group p-6 rounded-[32px] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-white/10 transition-all duration-500 relative flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               {/* Refractive Flare Hover Effect */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -142,21 +142,21 @@ export default function Services() {
               <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-white/0 group-hover:border-white/20 transition-all duration-500 rounded-bl-sm" />
               <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-white/0 group-hover:border-white/20 transition-all duration-500 rounded-br-sm" />
 
-              <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-white/5 flex items-center justify-center mb-8 text-zinc-500 group-hover:text-red-600 transition-all duration-500 relative">
+              <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-white/5 flex items-center justify-center mb-6 text-zinc-500 group-hover:text-red-600 transition-all duration-500 relative">
                 <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/5 blur-xl transition-all duration-500 rounded-full" />
                 <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
                   {service.icon}
                 </div>
               </div>
 
-              <h3 className="text-2xl font-display font-bold text-white mb-4 tracking-tight group-hover:text-red-500 transition-colors duration-300">
+              <h3 className="text-2xl font-display font-bold text-white mb-3 tracking-tight group-hover:text-red-500 transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-zinc-400 mb-8 leading-relaxed text-[15px] font-light flex-1">
+              <p className="text-zinc-400 mb-6 leading-relaxed text-[15px] font-light flex-1">
                 {service.description}
               </p>
 
-              <div className="space-y-4 mb-2">
+              <div className="space-y-3 mb-2">
                 <motion.div 
                   initial="initial"
                   whileHover="hover"
@@ -178,7 +178,7 @@ export default function Services() {
                 </motion.div>
               </div>
 
-              <div className="pt-8 border-t border-white/5 mt-auto">
+              <div className="pt-6 border-t border-white/5 mt-auto">
                 <Link
                   href="/#contact"
                   className="group/link inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-500 hover:text-white transition-all relative"
