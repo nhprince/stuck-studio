@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Globe, Github, Linkedin, Mail, CircleCheckBig } from 'lucide-react';
@@ -68,11 +69,57 @@ function Member({ m, index }: { m: any; index: number }) {
     right: 'top-[65%] sm:top-[55%] right-0 sm:-right-4 z-10',
   }[m.position as 'left' | 'center' | 'right'];
 
+  // 3D parallax refs & state
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const [isActive, setIsActive] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else mq.addListener(handler as any);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else mq.removeListener(handler as any);
+    };
+  }, []);
+
+  function handlePointerMove(e: React.PointerEvent) {
+    if (reducedMotion) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = x / rect.width - 0.5; // -0.5 .. 0.5
+    const py = y / rect.height - 0.5;
+    const rotateY = px * 14; // degrees
+    const rotateX = -py * 14;
+    el.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    el.style.setProperty('--rx', `${rotateX}deg`);
+    el.style.setProperty('--ry', `${rotateY}deg`);
+  }
+
+  function handlePointerLeave() {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transform = '';
+    el.style.setProperty('--rx', `0deg`);
+    el.style.setProperty('--ry', `0deg`);
+  }
+
   return (
     <div className={`absolute ${positionClasses} group w-full max-w-[150px] sm:max-w-none sm:w-auto`}>
       <div
-        className="flex flex-col items-center transition-transform duration-500 group-hover:scale-105"
-        style={{ animation: `float 6s ease-in-out infinite ${index * 1.5}s` }}
+        ref={cardRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onClick={() => setIsActive((s) => !s)}
+        className={`flex flex-col items-center will-change-transform transition-transform duration-500 ${isActive ? 'scale-105' : ''}`}
+        style={{ animation: `float 6s ease-in-out infinite ${index * 1.5}s`, transformStyle: 'preserve-3d' }}
       >
         {/* Glowing Avatar */}
         <div
@@ -80,7 +127,17 @@ function Member({ m, index }: { m: any; index: number }) {
             isCenter ? 'w-20 h-20 sm:w-28 sm:h-28' : 'w-16 h-16 sm:w-20 sm:h-20'
           }`}
         >
-          <div className="w-full h-full relative rounded-full overflow-hidden bg-zinc-950 border border-black">
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle at 30% 20%, rgba(255,80,80,0.12), transparent 40%)',
+              filter: 'blur(18px)',
+              transform: 'translateZ(22px)',
+              opacity: 0.95,
+            }}
+          />
+
+          <div className="w-full h-full relative rounded-full overflow-hidden bg-zinc-950 border border-black" style={{ transform: 'translateZ(36px)' }}>
             <Image src={m.image} alt={m.name} fill className="object-cover" />
           </div>
         </div>
@@ -90,7 +147,7 @@ function Member({ m, index }: { m: any; index: number }) {
           <p className="text-[13px] sm:text-[14px] font-bold text-zinc-100 mb-0.5 leading-tight">{m.name}</p>
           <p className="text-[10px] sm:text-[11px] text-zinc-400 mb-3">{m.role}</p>
 
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center gap-2" style={{ transform: 'translateZ(18px)' }}>
             <IconBtn href={`mailto:${m.email}`}>
               <Mail size={12} />
             </IconBtn>
