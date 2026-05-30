@@ -12,3 +12,11 @@ out/
 # project videos/
 # Thumbnails designs/
 # file_example_MP4*.mp4
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
