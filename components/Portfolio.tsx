@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'motion/react';
 import {
@@ -6,14 +7,12 @@ import {
   ArrowUpRight, Sparkles, X,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 
 import { portfolio, thumbnails } from '@/data/portfolio';
 
 type PortfolioItem = typeof portfolio[number];
 type ThumbnailItem = typeof thumbnails[number];
-
-
 
 /* ─── VIDEO CARD ────────────────────────────────────────────── */
 function VideoCard({ item, index }: { item: PortfolioItem; index: number }) {
@@ -22,10 +21,11 @@ function VideoCard({ item, index }: { item: PortfolioItem; index: number }) {
   const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mobile = typeof window !== 'undefined' && (
       'ontouchstart' in window || navigator.maxTouchPoints > 0 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
     );
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobile(Boolean(mobile));
   }, []);
 
@@ -152,7 +152,6 @@ function WebCard({ item, index }: { item: PortfolioItem; index: number }) {
 }
 
 /* ─── LIGHTBOX MODAL (Thumbnails) ───────────────────────────── */
-// FIX: Same overlay-button pattern applied here too
 function LightboxModal({ item, index, onClose, onPrev, onNext, setLightboxIndexDirect }: {
   item: ThumbnailItem; index: number;
   onClose: () => void; onPrev: () => void; onNext: () => void;
@@ -193,7 +192,7 @@ function LightboxModal({ item, index, onClose, onPrev, onNext, setLightboxIndexD
         </button>
       </div>
 
-      {/* Image Area — FIX: full width, nav buttons overlaid */}
+      {/* Image Area */}
       <div className="flex-1 min-h-0 flex items-center justify-center px-3 sm:px-6" onClick={(e) => e.stopPropagation()}>
         <div className="relative w-full max-w-4xl">
           <motion.div
@@ -225,7 +224,6 @@ function LightboxModal({ item, index, onClose, onPrev, onNext, setLightboxIndexD
                 <p className="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] text-red-400 mt-0.5 sm:mt-1 font-bold">{item.niche}</p>
               </div>
 
-              {/* FIX: Nav buttons overlaid on image at mid-height */}
               <button
                 onClick={(e) => { e.stopPropagation(); onPrev(); }}
                 className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 group"
@@ -245,7 +243,7 @@ function LightboxModal({ item, index, onClose, onPrev, onNext, setLightboxIndexD
         </div>
       </div>
 
-      {/* Bottom Thumbnail Strip — FIX: larger touch targets */}
+      {/* Bottom Thumbnail Strip */}
       <div
         className="flex-shrink-0 flex justify-center gap-2 px-4 pt-3 pb-4 sm:pt-4 sm:pb-5 overflow-x-auto z-10"
         style={{ scrollbarWidth: 'none' }}
@@ -318,8 +316,6 @@ export default function Portfolio() {
   const closeLightbox = () => setLightboxIndex(null);
   const prevImage = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + thumbnails.length) % thumbnails.length));
   const nextImage = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % thumbnails.length));
-
-
 
   return (
     <section id="portfolio" className="py-16 md:py-24 relative bg-zinc-950 overflow-hidden" aria-label="Portfolio">
@@ -424,7 +420,6 @@ export default function Portfolio() {
           />
         )}
       </AnimatePresence>
-
 
     </section>
   );
